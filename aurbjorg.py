@@ -14,21 +14,21 @@ for url in urls:
         soup = BeautifulSoup(html, 'html.parser')
         data = soup.find("tbody", class_="Table_tbody___v1BZ")
         tr = data.find_all("tr")
-        print(tr)
-    #     for row in tr:
-    #         nafn = row.find("div", class_= "Headline_headline__A7A_e Headline_small___AoHg Headline_bold__wBkQ5 __className_c1491f")
-    #         prices = row.find_all("td", class_ = "Table_td__TflLc Table_leftAlign__fgXwz")
-    #         count = 0
-    #         dic = {}
-    #         for i in prices:
-    #             if(count == 0):
-    #                 dic["Verð (kWst)"] = i.text.strip()
-    #             elif(count == 1):
-    #                 dic["Meðalkostnaður"] = i.text.strip()
-    #             count+=1
-    #         print(nafn, dic)
-    #         vorur[nafn] = dic
+        for row in tr:
+            nafn = row.find("div", class_= "Headline_headline__A7A_e Headline_small___AoHg Headline_bold__wBkQ5 __className_c1491f")
+            prices = row.find_all("td", class_ = "Table_td__TflLc Table_leftAlign__fgXwz")
+            count = 0
+            dic = {}
+            for i in prices:
+                if(count == 1):
+                    dic["Verð (kWst)"] = i.text.strip()
+                elif(count == 2):
+                    dic["Meðalkostnaður"] = i.text.strip()
+                count+=1
+            vorur[nafn.text.strip()] = dic
 
     except Exception as e:
         print(f"Error processing {url}: {e}")
 
+for key, value in vorur.items():
+    print(key, value)
