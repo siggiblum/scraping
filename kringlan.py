@@ -45,8 +45,8 @@ for url in urls:
                     "Útsöluverð": sale_price,
                     "On_sale": sale
                 }
+                
                 vorur.append(temp)
-
     except Exception as e:
         print(f"Error processing {url}: {e}")
 
