@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
-#Vantar 20/450 vörum hjá körlunum af einhverri ástæðu
 
 vorur = []
 name_counts = {}
