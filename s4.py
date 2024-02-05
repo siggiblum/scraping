@@ -32,7 +32,7 @@ for url in urls:
             except Exception as e:
                 print("No more products to load or error clicking the button:", e)
                 break
-            
+
         # Scrape the updated page source after every load more action
         time.sleep(5)
         html = driver.page_source
@@ -64,7 +64,7 @@ for url in urls:
                 
                 item_dict['normal_price'] = normal_price
                 item_dict['sales'] = sales
-                
+
                 vorur.append(item_dict)
 
     except Exception as e:
@@ -74,4 +74,5 @@ for url in urls:
 for i in vorur:
     print(i)
 print(len(vorur))
+
 driver.quit()
