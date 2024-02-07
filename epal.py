@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
 
+#Allt virðist virka vel fyrir afslætti og venjulegar vörur
+
 vorur = []
 name_counts = {}
 ur = [
