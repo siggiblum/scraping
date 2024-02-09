@@ -19,6 +19,7 @@ urls = []
 for base_url in ur:
     urls.extend([f"{base_url}#page={i}" for i in range(2, 50)])
 
+urls = ur + urls
 options = Options()
 options.headless = True
 driver = webdriver.Chrome(options=options)

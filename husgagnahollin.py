@@ -6,14 +6,20 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
 vorur = []
+url = ["https://husgagnahollin.is/voruflokkur/sofar/","https://husgagnahollin.is/voruflokkur/stolar/",
+        "https://husgagnahollin.is/voruflokkur/bord/", "https://husgagnahollin.is/voruflokkur/husgogn/",
+        "https://husgagnahollin.is/voruflokkur/gjafavorur/", "https://husgagnahollin.is/voruflokkur/gjafavorur/gjafahugmyndir/"]
+
 urls = ["https://husgagnahollin.is/voruflokkur/sofar/","https://husgagnahollin.is/voruflokkur/stolar/",
         "https://husgagnahollin.is/voruflokkur/bord/", "https://husgagnahollin.is/voruflokkur/husgogn/",
         "https://husgagnahollin.is/voruflokkur/gjafavorur/", "https://husgagnahollin.is/voruflokkur/gjafavorur/gjafahugmyndir/"]
 
-for x in urls:
+for x in url:
     for i in range(2,50):
         tem = x + f"page/{i}/"
         urls.append(tem)
+        print(tem)
+
 
 options = Options()
 options.headless = True
