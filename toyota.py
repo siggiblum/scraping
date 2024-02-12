@@ -9,15 +9,16 @@ import time
 #Skrapar bila en lika aukahluti og thad getur verid allt fra bol upp i dekk
 
 vorur = []
-url = ["https://www.hekla.is/is/bilar/nyir-bilar-syningasalur", "https://www.hekla.is/is/bilar/notadir-bilar"]
+# url = ["https://www.hekla.is/is/bilar/nyir-bilar-syningasalur", "https://www.hekla.is/is/bilar/notadir-bilar"]
 
-urls = []
-for base_url in url:
-    urls.extend([f"{base_url}?page={i}" for i in range(2, 100)])
-url1 = ["https://www.hekla.is/is/bilar/aukahlutir?sort=random-asc"]
-for base_url in url1:
-    urls.extend([f"{base_url}&page={i}" for i in range(2, 100)])
-urls = url + urls + url1
+# urls = []
+# for base_url in url:
+#     urls.extend([f"{base_url}?page={i}" for i in range(2, 100)])
+# url1 = ["https://www.hekla.is/is/bilar/aukahlutir?sort=random-asc"]
+# for base_url in url1:
+#     urls.extend([f"{base_url}&page={i}" for i in range(2, 100)])
+# urls = url + urls + url1
+urls = ["https://www.toyota.is/new-cars?showMoreFilters=false"]
 options = Options()
 options.headless = True
 driver = webdriver.Chrome(options=options)
@@ -28,11 +29,11 @@ for url in urls:
         time.sleep(5)
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
-        data = soup.find_all("div", class_="content")
+        data = soup.find_all("div", class_="ModelResultStyles__Header-sc-1por3lq-4 kcYORJ")
         for row in data:
-            nafn1 = row.find('h2', class_="title")
+            nafn1 = row.find('a', class_="ModelResultStyles__RedirectWrapper-sc-1por3lq-6 gdWzQL")
             if(nafn1):
-                nafn = nafn1.find("span").text.strip()
+                nafn = nafn1.text.strip()
             else:
                 nafn =  None
             if(row.find("div", class_="priceBefore")):
@@ -43,9 +44,10 @@ for url in urls:
             else:
                 sale = False
                 sale_price = None
-                regular_price_element = row.find("span", class_ = "n")
+                regular_price_element = row.find("div", class_ = "ModelResultPriceStyles__Cash-sc-45o5ol-1 jjtNHu t-zeta-text")
                 if(regular_price_element):
-                    regular_price = regular_price_element.text.strip()
+                    regular_price = regular_price_element.text.strip().split(" ")
+                    regular_price = regular_price[1]
                 else: 
                     None
 
